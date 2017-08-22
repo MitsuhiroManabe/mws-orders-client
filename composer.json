@@ -1,0 +1,19 @@
+{
+    "name": "kumaneko/mws-orders-client",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Mitsuhiro Manabe",
+            "email": "mmanabe1980@gmail.com"
+        }
+    ],
+    "require": {
+    	"php": ">=5.6.0",
+        "ext-curl": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Kumaneko\\MwsOrdersClient\\": "src/classes/"
+        }
+    }
+}

@@ -1,0 +1,7 @@
+/vendor/*
+/tmp/*
+/logs/*
+.idea/workspace.xml
+.idea/
+!*.gitkeep
+composer.lock
