@@ -25,13 +25,27 @@ class ListOrderItemsResponse extends Response
 
     protected function parseNode($xmlObject)
     {
-        if ($xmlObject->getName() == 'OrderItems' && ! empty($xmlObject->OrderItems)) {
+        if ($xmlObject->getName() == 'OrderItems' && ! empty($xmlObject->OrderItem)) {
             $orderItems = [];
-            foreach ($xmlObject->OrderItems as $orderItemElement) {
+            foreach ($xmlObject->OrderItem as $orderItemElement) {
                 $orderItems[] = new OrderItem($orderItemElement);
             }
             return ['OrderItems' => $orderItems];
         }
         return parent::parseNode($xmlObject);
+    }
+
+    public function __get($name)
+    {
+        $methodName = 'get' . ucfirst($name);
+        if (method_exists($this, $methodName)) {
+            return $this->$methodName($name);
+        } elseif (isset($this->params['result'][$name])) {
+            return $this->params['result'][$name];
+        } elseif (isset($this->params[$name])) {
+            return $this->params[$name];
+        } else {
+            return null;
+        }
     }
 }

@@ -9,18 +9,7 @@ class ListOrdersRequest extends Request
         'CreatedBefore' => ['type' => 'datetime'],
         'LastUpdatedAfter' => ['type' => 'datetime'],
         'LastUpdateBefore' => ['type' => 'datetime'],
-        'OrderStatus' => [
-            'type' => 'string',
-            'options' => [
-                'PendingAvailability',
-                'Pending',
-                'Unshipped',
-                'PartiallyShipped',
-                'Shipped',
-                'Cancelled',
-                'Unfulfillable',
-            ],
-        ],
+        'OrderStatus' => ['type' => 'array',],
         'FulfillmentChannel' => [
             'type' => 'string',
             'options' => [

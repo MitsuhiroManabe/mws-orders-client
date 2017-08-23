@@ -2,7 +2,7 @@
     "name": "kumaneko/mws-orders-client",
     "type": "library",
     "description": "Client Library for MWS Orders API(Personal Use).",
-    "license": "proprietary",
+    "license": "MIT",
     "authors": [
         {
             "name": "Mitsuhiro Manabe",

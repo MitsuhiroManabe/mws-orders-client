@@ -4,80 +4,81 @@ namespace Kumaneko\MwsOrdersClient\Response;
 /**
  * Class Order
  * @package Kumaneko\Response
- * @param string $ShipmentServiceLevelCategory
- * @param string $ShipServiceLevel
- * @param \DateTime|null $EarliestShipDate
- * @param \DateTime|null $LatestShipDate
- * @param string $MarketplaceId
- * @param string $SalesChannel
- * @param string $OrderType
- * @param string $BuyerEmail
- * @param string $BuyerName
- * @param \DateTime|null $LatestUpdateDate
- * @param \DateTime|null $PurchaseDate
- * @param int $NumberOfItemsShipped
- * @param int $NumberOfItemsUnshipped
- * @param string $AmazonOrderId
- * @param string $PaymentMethod
- * @param array $orderItems
+ * @property  string|null ShipmentServiceLevelCategory
+ * @property string|null ShipServiceLevel
+ * @property \DateTime|null EarliestShipDate
+ * @property \DateTime|null LatestShipDate
+ * @property string|null MarketplaceId
+ * @property string|null SalesChannel
+ * @property string|null OrderType
+ * @property string|null BuyerEmail
+ * @property string|null BuyerName
+ * @property \DateTime|null LatestUpdateDate
+ * @property \DateTime|null PurchaseDate
+ * @property string|null NumberOfItemsShipped
+ * @property string|null NumberOfItemsUnshipped
+ * @property string|null AmazonOrderId
+ * @property string|null PaymentMethod
+ * @property array|null OrderItems
+ * @property array|null OrderTotal
+ * @property array|null ShippingAddress
+ * @property array|null PaymentExecutionDetail
+ * @property string|null OrderStatus
+ *
  */
 class Order extends Response
 {
-    protected $orderItems = [];
-
-    public function getLastUpdateTime()
+    public function setLastUpdateTime($value)
     {
-        if (empty($this->params['LastUpdateDate'])) {
-            return null;
+        if (empty($value)) {
+            return false;
         } else {
             try {
-                return new \DateTime($this->params['LastUpdateDate']);
+                return $this->params['LastUpdateTime'] = new \DateTime($value);
             } catch(\Exception $e) {
-                return null;
+                return false;
             }
         }
     }
 
-    public function getPurchaseDate()
+    public function setPurchaseDate($value)
     {
-        if (empty($this->params['PurchaseDate'])) {
-            return null;
+        if (empty($value)) {
+            return false;
         } else {
             try {
-                return new \DateTime($this->params['PurchaseDate']);
+                return $this->params['PurchaseDate'] = new \DateTime($value);
             } catch(\Exception $e) {
-                return null;
+                return false;
             }
         }
     }
 
-    public function getEarliestShipDate()
+    public function setEarliestShipDate($value)
     {
-        if (empty($this->params['EarliestShipDate'])) {
-            return null;
+        if (empty($value)) {
+            return false;
         } else {
             try {
-                return new \DateTime($this->params['EarliestShipDate']);
+                return $this->params['EarliestShipDate'] = new \DateTime($value);
             } catch(\Exception $e) {
-                return null;
+                return false;
             }
         }
     }
 
-    public function getLatestShipDate()
+    public function setLatestShipDate($value)
     {
-        if (empty($this->params['LatestShipDate'])) {
-            return null;
+        if (empty($value)) {
+            return false;
         } else {
-            try {
-                return new \DateTime($this->params['LatestShipDate']);
-            } catch(\Exception $e) {
-                return null;
-            }
+            return $this->params['LatestShipDate'] = new \DateTime($value);
+
         }
     }
 
-    public function addOrderItem($orderItem) {
-        $this->orderItems[] = $orderItem;
+    public function addOrderItem($orderItem)
+    {
+        $this->params['OrderItems'][] = $orderItem;
     }
 }

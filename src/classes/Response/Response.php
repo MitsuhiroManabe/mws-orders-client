@@ -19,7 +19,10 @@ class Response
      */
     public function __construct($xmlObject)
     {
-        $this->params = $this->parseXml($xmlObject);
+        $params = $this->parseXml($xmlObject);
+        foreach ($params as $name => $value) {
+            $this->__set($name, $value);
+        }
     }
 
     /**
@@ -42,11 +45,11 @@ class Response
      */
     protected function parseNode($xmlObject)
     {
-        if ($xmlObject->count()) {
+        if ($xmlObject->count() > 1) {
             $result = [];
-            foreach ($xmlObject->children() as $childNode) {
+            foreach ($xmlObject as $childNode) {
                 /** @var \SimpleXMLElement $childNode */
-                $result[$childNode->getName()] = $this->parseNode($childNode);
+                $result += $this->parseNode($childNode);
             }
             return [$xmlObject->getName() => $result];
         } else {
@@ -63,6 +66,15 @@ class Response
             return $this->params[$name];
         } else {
             return null;
+        }
+    }
+
+    public function __set($name, $value) {
+        $methodName = 'set' . ucfirst($name);
+        if (method_exists($this, $methodName)) {
+            return $this->$methodName($value);
+        } else {
+            return $this->params[$name] = $value;
         }
     }
 
