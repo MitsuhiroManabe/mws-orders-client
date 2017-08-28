@@ -1,6 +1,21 @@
 <?php
 namespace Kumaneko\MwsOrdersClient\Request;
 
+/**
+ * Class ListOrdersRequest
+ * @package Kumaneko\MwsOrdersClient\Request
+ * @property \DateTime|null CreatedAfter
+ * @property \DateTime|null CreatedBefore
+ * @property \DateTime|null LastUpdatedAfter
+ * @property \DateTime|null LastUpdatedBefore
+ * @property array|null OrderStatus
+ * @property string|null FulfillmentChannel
+ * @property string|null PaymentMethod
+ * @property string|null BuyerEmail
+ * @property string|null SellerOrderId
+ * @property string|null MaxResultPerPage
+ * @property string|null TFMShipmentStatus
+ */
 class ListOrdersRequest extends Request
 {
     protected $operationName = 'ListOrders';

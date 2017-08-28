@@ -1,17 +1,13 @@
 <?php
 namespace Kumaneko\MwsOrdersClient\Response;
 
-class ListOrdersResponse extends Response
+class GetOrderResponse extends Response
 {
-    /**
-     * @param \SimpleXMLElement $xmlObject
-     * @return array
-     */
     protected function parseXml($xmlObject)
     {
         $response = [];
-        if (! empty($xmlObject->ListOrdersResult)) {
-            $resultObject = $xmlObject->ListOrdersResult;
+        if (! empty($xmlObject->GetOrderResult)) {
+            $resultObject = $xmlObject->GetOrderResult;
             /** @var \SimpleXMLElement $resultObject */
             $response['result'] = parent::parseXml($resultObject);
         } else {
@@ -27,26 +23,18 @@ class ListOrdersResponse extends Response
         return $response;
     }
 
-    /**
-     * @param \SimpleXMLElement $xmlObject
-     * @return array
-     */
     protected function parseNode($xmlObject)
     {
         if ($xmlObject->getName() == 'Orders' && ! empty($xmlObject->Order)) {
-            $orders = [];
+            $orderItems = [];
             foreach ($xmlObject->Order as $orderElement) {
-                $orders[] = new Order($orderElement);
+                $orderItems[] = new OrderItem($orderElement);
             }
-            return ['Orders' => $orders];
+            return ['Orders' => $orderItems];
         }
         return parent::parseNode($xmlObject);
     }
 
-    /**
-     * @param $name
-     * @return null
-     */
     public function __get($name)
     {
         $methodName = 'get' . ucfirst($name);
@@ -58,6 +46,15 @@ class ListOrdersResponse extends Response
             return $this->params[$name];
         } else {
             return null;
+        }
+    }
+
+    public function getOder()
+    {
+        if (empty($this->params['result']['Orders'][0])) {
+            return null;
+        } else {
+            $this->params['result']['Orders'][0];
         }
     }
 }

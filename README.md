@@ -1,13 +1,14 @@
 MWS注文APIを利用して、注文情報を取得するライブラリです。
-v0.1.1現在、注文リストの取得機能のみ利用可能です。
 
 ListOrdersオペレーションはOrderStatusを指定しない限り、保留中を含む全ての注文を返します。
 またOrderStatusを指定する場合、UnshippedとPartiallyShippedはどちらか片方だけを指定することはできず、
 両方を指定することのみが可能です。
 
-*サンプルコード*
+*サンプルコード1*
+
+ListOrders, ListOrderItems オペレーションを利用して、直近3時間の注文情報を取得する。
     
-    //***アカウント情報を入力して下さい。***
+    //***アカウント情報***
     $sellerId = "***セラーID***";
     $awsAccessKeyId = "***AWSアクセスキーID***";
     $secretKey = "***シークレットキー***";
@@ -54,3 +55,26 @@ ListOrdersオペレーションはOrderStatusを指定しない限り、保留�
         sleep(1);
     }
     
+*サンプルコード2*
+
+GetOrderオペレーションで注文ステータスを取得する
+
+    //***アカウント情報***
+    $sellerId = "***セラーID***";
+    $awsAccessKeyId = "***AWSアクセスキーID***";
+    $secretKey = "***シークレットキー***";
+    //***注文番号***。
+    $amazonOrderId = "***注文番号***";
+    
+    $client = new Kumaneko\MwsOrdersClient\Client();
+    $request = new Kumaneko\MwsOrdersClient\Request\GetOrderRequest([
+         'SellerId' => $sellerId,
+         'AWSAccessKeyId' => $awsAccessKeyId,
+         'AmazonOrderId' => $amazonOrderId,
+         'SecretKey' => $secretKey
+     ]);
+     $result = $client->getOrderRequest($request);
+     $order = $result->getOrder();
+     echo "AmazonOrderID: {$order->AmazonOrderId}\n";
+     echo "Status: {$oder->OrderStatus}\n";
+     

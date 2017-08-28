@@ -2,14 +2,14 @@
 namespace Kumaneko\MwsOrdersClient\Request;
 
 /**
- * Class ListOrderItemsRequest
+ * Class GetOrderRequest
  * @package Kumaneko\MwsOrdersClient\Request
  * @property string AmazonOrderId
  */
-class ListOrderItemsRequest extends Request
+class GetOrderRequest extends Request
 {
-    protected $operationName = 'ListOrderItems';
+    protected $operationName = 'getOrder';
     protected $schema = [
         'AmazonOrderId' => ['type' => 'string', 'required' => true],
-        ];
+    ];
 }

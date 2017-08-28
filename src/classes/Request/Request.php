@@ -1,6 +1,13 @@
 <?php
 namespace Kumaneko\MwsOrdersClient\Request;
 
+/**
+ * Class Request
+ * @package Kumaneko\MwsOrdersClient\Request
+ * @property array params
+ * @property string serviceUrl
+ *
+ */
 class Request
 {
     protected $defaultParams = [

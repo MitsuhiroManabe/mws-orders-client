@@ -13,7 +13,6 @@ namespace Kumaneko\MwsOrdersClient\Response;
  * @property string|null AmazonOrderId
  * @property string|null QuantityOrdered
  * @property string|null QuantityShipped
- * @property array|null ShippingPrice
  * @property \DateTime|null ScheduledDeliveryEndDate
  * @property \DateTime|null ScheduledDeliveryStartDate
  * @property string|null CODFee

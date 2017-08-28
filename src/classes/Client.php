@@ -1,14 +1,20 @@
 <?php
 namespace Kumaneko\MwsOrdersClient;
 
+use Kumaneko\MwsOrdersClient\Request\GetOrderRequest;
 use Kumaneko\MwsOrdersClient\Request\ListOrderItemsRequest;
 use Kumaneko\MwsOrdersClient\Request\ListOrdersByNextTokenRequest;
 use Kumaneko\MwsOrdersClient\Request\ListOrdersRequest;
 use Kumaneko\MwsOrdersClient\Request\Request;
+use Kumaneko\MwsOrdersClient\Response\GetOrderResponse;
 use Kumaneko\MwsOrdersClient\Response\ListOrderItemsResponse;
 use Kumaneko\MwsOrdersClient\Response\ListOrdersByNextTokenResponse;
 use Kumaneko\MwsOrdersClient\Response\ListOrdersResponse;
 
+/**
+ * Class Client
+ * @package Kumaneko\MwsOrdersClient
+ */
 class Client
 {
     protected $config = [
@@ -21,6 +27,10 @@ class Client
     protected $headers;
     protected $httpStatusCode;
 
+    /**
+     * Client constructor.
+     * @param array $config
+     */
     public function __construct(array $config = [])
     {
         if($config) {
@@ -28,6 +38,11 @@ class Client
         }
     }
 
+    /**
+     * @param Request $request
+     * @return null|\SimpleXMLElement
+     * @throws \Exception
+     */
     protected function request(Request $request)
     {
         unset($this->headers);
@@ -75,6 +90,10 @@ class Client
         return null;
     }
 
+    /**
+     * @param Request $request
+     * @return array
+     */
     protected function _invoke(Request $request)
     {
         $ch = curl_init();
@@ -99,11 +118,17 @@ class Client
         ];
     }
 
+    /**
+     * @return array
+     */
     public function getHeaders()
     {
         return $this->headers;
     }
 
+    /**
+     * @return string|null
+     */
     public function getHttpStatusCode()
     {
         if (empty($this->httpStatusCode)) {
@@ -113,19 +138,47 @@ class Client
         }
     }
 
+    /**
+     * Request ListOrders operation.
+     * @param ListOrdersRequest $request
+     * @return ListOrdersResponse
+     */
     public function listOrdersRequest(ListOrdersRequest $request)
     {
         $xml = $this->request($request);
         return new ListOrdersResponse($xml);
     }
 
-    public function listOrdersByNextTokenRequest(ListOrdersByNextTokenRequest $request) {
+    /**
+     * Request ListOrdersByNextToken operation.
+     * @param ListOrdersByNextTokenRequest $request
+     * @return ListOrdersByNextTokenResponse
+     */
+    public function listOrdersByNextTokenRequest(ListOrdersByNextTokenRequest $request)
+    {
         $xml = $this->request($request);
         return new ListOrdersByNextTokenResponse($xml);
     }
 
-    public function listOrderItemsRequest(ListOrderItemsRequest $request) {
+    /**
+     * Request ListOrderItems operation.
+     * @param ListOrderItemsRequest $request
+     * @return ListOrderItemsResponse
+     */
+    public function listOrderItemsRequest(ListOrderItemsRequest $request)
+    {
         $xml = $this->request($request);
         return new ListOrderItemsResponse($xml);
+    }
+
+    /**
+     * Request GetOrder operation.
+     * @param GetOrderRequest $request
+     * @return GetOrderResponse
+     */
+    public function getOrderRequest(GetOrderRequest $request)
+    {
+        $xml = $this->request($request);
+        return new GetOrderResponse($xml);
     }
 }

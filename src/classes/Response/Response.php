@@ -1,14 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: mmanabe
- * Date: 2017/08/23
- * Time: 5:34
- */
-
 namespace Kumaneko\MwsOrdersClient\Response;
 
-
+/**
+ * Class Response
+ * @package Kumaneko\MwsOrdersClient\Response
+ * @property array params
+ */
 class Response
 {
     protected $params;
@@ -57,6 +54,11 @@ class Response
         }
     }
 
+    /**
+     * Magic method __get.
+     * @param $name
+     * @return null
+     */
     public function __get($name)
     {
         $methodName = 'get' . ucfirst($name);
@@ -69,6 +71,12 @@ class Response
         }
     }
 
+    /**
+     * Magic method __set.
+     * @param $name
+     * @param $value
+     * @return mixed
+     */
     public function __set($name, $value) {
         $methodName = 'set' . ucfirst($name);
         if (method_exists($this, $methodName)) {
@@ -78,8 +86,19 @@ class Response
         }
     }
 
+    /**
+     * @return mixed
+     */
     public function getParams()
     {
         return $this->params;
+    }
+
+    /**
+     * @return array|null
+     */
+    public function getResult()
+    {
+        return empty($this->params['result']) ? null : $this->params['result'];
     }
 }
