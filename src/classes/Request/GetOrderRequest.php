@@ -8,8 +8,8 @@ namespace Kumaneko\MwsOrdersClient\Request;
  */
 class GetOrderRequest extends Request
 {
-    protected $operationName = 'getOrder';
+    protected $operationName = 'GetOrder';
     protected $schema = [
-        'AmazonOrderId' => ['type' => 'string', 'required' => true],
+        'AmazonOrderId.Id.1' => ['type' => 'string', 'required' => true],
     ];
 }
