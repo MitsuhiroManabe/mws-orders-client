@@ -77,6 +77,6 @@ GetOrderオペレーションで注文ステータスを取得する
      $orders = $result->getOrders();
      foreach ($orders as $order) {
          echo "AmazonOrderID: {$order->AmazonOrderId}\n";
-         echo "Status: {$oder->OrderStatus}\n";
+         echo "Status: {$order->OrderStatus}\n";
      }
      
