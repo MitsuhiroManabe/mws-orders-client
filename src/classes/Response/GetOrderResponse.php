@@ -48,13 +48,4 @@ class GetOrderResponse extends Response
             return null;
         }
     }
-
-    public function getOrders()
-    {
-        if (empty($this->params['result']['Orders'])) {
-            return null;
-        } else {
-            $this->params['result']['Orders'];
-        }
-    }
 }

@@ -74,8 +74,7 @@ GetOrderオペレーションで注文ステータスを取得する
          'SecretKey' => $secretKey
      ]);
      $result = $client->getOrderRequest($request);
-     $orders = $result->getOrders();
-     foreach ($orders as $order) {
+     foreach ($result->Orders as $order) {
          echo "AmazonOrderID: {$order->AmazonOrderId}\n";
          echo "Status: {$order->OrderStatus}\n";
      }
