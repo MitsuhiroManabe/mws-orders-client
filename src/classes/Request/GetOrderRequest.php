@@ -10,6 +10,6 @@ class GetOrderRequest extends Request
 {
     protected $operationName = 'GetOrder';
     protected $schema = [
-        'AmazonOrderId.Id.1' => ['type' => 'string', 'required' => true],
+        'AmazonOrderId' => ['type' => 'array', 'required' => true],
     ];
 }

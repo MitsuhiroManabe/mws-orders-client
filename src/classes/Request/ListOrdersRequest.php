@@ -24,7 +24,7 @@ class ListOrdersRequest extends Request
         'CreatedBefore' => ['type' => 'datetime'],
         'LastUpdatedAfter' => ['type' => 'datetime'],
         'LastUpdateBefore' => ['type' => 'datetime'],
-        'OrderStatus' => ['type' => 'array',],
+        'OrderStatus' => ['type' => 'array'],
         'FulfillmentChannel' => [
             'type' => 'string',
             'options' => [

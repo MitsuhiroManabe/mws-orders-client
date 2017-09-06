@@ -49,12 +49,12 @@ class GetOrderResponse extends Response
         }
     }
 
-    public function getOder()
+    public function getOrders()
     {
-        if (empty($this->params['result']['Orders'][0])) {
+        if (empty($this->params['result']['Orders'])) {
             return null;
         } else {
-            $this->params['result']['Orders'][0];
+            $this->params['result']['Orders'];
         }
     }
 }

@@ -70,11 +70,13 @@ GetOrderオペレーションで注文ステータスを取得する
     $request = new Kumaneko\MwsOrdersClient\Request\GetOrderRequest([
          'SellerId' => $sellerId,
          'AWSAccessKeyId' => $awsAccessKeyId,
-         'AmazonOrderId' => $amazonOrderId,
+         'AmazonOrderId' => ['Id' => ['1' => $amazonOrderId]],
          'SecretKey' => $secretKey
      ]);
      $result = $client->getOrderRequest($request);
-     $order = $result->getOrder();
-     echo "AmazonOrderID: {$order->AmazonOrderId}\n";
-     echo "Status: {$oder->OrderStatus}\n";
+     $orders = $result->getOrders();
+     foreach ($orders as $order) {
+         echo "AmazonOrderID: {$order->AmazonOrderId}\n";
+         echo "Status: {$oder->OrderStatus}\n";
+     }
      
