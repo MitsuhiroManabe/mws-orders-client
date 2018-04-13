@@ -19,6 +19,7 @@ class Request
     protected $defaultSchema = [
         'SellerId' => ['type' => 'string', 'required' => true],
         'AWSAccessKeyId' => ['type' => 'string', 'required' => true],
+        'MWSAuthToken' => ['type' => 'string'],
     ];
     protected $schema = [];
     protected $params = [];
@@ -30,6 +31,7 @@ class Request
     /**
      * Request constructor.
      * @param array $params
+     * @throws \Exception
      */
     public function __construct($params = [])
     {
@@ -56,6 +58,12 @@ class Request
         return $this->params[$name];
     }
 
+    /**
+     * @param $name
+     * @param $value
+     * @return mixed
+     * @throws \Exception
+     */
     protected function setParam($name, $value)
     {
         if (array_key_exists($name, $this->schema)) {
@@ -154,6 +162,7 @@ class Request
 
     /**
      * @return string
+     * @throws \Exception
      */
     public function httpQuery()
     {
@@ -194,6 +203,9 @@ class Request
         return $formattedParams;
     }
 
+    /**
+     * @throws \Exception
+     */
     protected function validate()
     {
         foreach ($this->schema as $key => $values) {
